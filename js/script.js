@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  // Always start at the top of the page, ignoring any restored scroll position
+  window.scrollTo(0, 0);
+
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");
   var mobileNav = document.getElementById("mobileNav");
@@ -40,16 +43,78 @@
     });
   }
 
-  // Lead form (client-side only — connect to a real backend/email service later)
+  // Before/After image lightbox
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightboxImg");
+  var lightboxClose = document.getElementById("lightboxClose");
+  var baImages = document.querySelectorAll(".ba-images img");
+
+  function openLightbox(img) {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add("open");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightboxImg.src = "";
+  }
+
+  if (lightbox && lightboxImg && lightboxClose && baImages.length) {
+    baImages.forEach(function (img) {
+      img.addEventListener("click", function () {
+        openLightbox(img);
+      });
+    });
+
+    lightboxImg.addEventListener("click", closeLightbox);
+    lightboxClose.addEventListener("click", closeLightbox);
+  }
+
+  // Lead form — submits to FormSubmit.co, which emails the inquiry to the office
   var leadForm = document.getElementById("leadForm");
   var formMsg = document.getElementById("formMsg");
+  var LEAD_EMAIL = "0404ksks@naver.com";
 
   if (leadForm && formMsg) {
     leadForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      formMsg.classList.add("success");
-      leadForm.reset();
-      formMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      var submitBtn = leadForm.querySelector("button[type=submit]");
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch("https://formsubmit.co/ajax/" + LEAD_EMAIL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          접수자성함: leadForm.name.value,
+          연락처: leadForm.phone.value,
+          지역: leadForm.region.value,
+          문의내용: leadForm.message.value,
+          _subject: "[예인건설산업] 새 무료 견적 문의가 접수되었습니다",
+        }),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("submit failed");
+          formMsg.classList.remove("error");
+          formMsg.classList.add("success");
+          formMsg.textContent =
+            "감사합니다! 접수가 완료되었습니다. 빠른 시간 내에 연락드리겠습니다.";
+          leadForm.reset();
+        })
+        .catch(function () {
+          formMsg.classList.remove("success");
+          formMsg.classList.add("error");
+          formMsg.textContent =
+            "전송에 실패했습니다. 전화(010-8257-0404)로 문의해 주세요.";
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+          formMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
     });
   }
 })();

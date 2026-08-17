@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  // Always start at the top of the page, ignoring any restored scroll position
+  window.scrollTo(0, 0);
+
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");
   var mobileNav = document.getElementById("mobileNav");
@@ -38,6 +41,34 @@
     revealEls.forEach(function (el) {
       el.classList.add("in-view");
     });
+  }
+
+  // Before/After image lightbox
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightboxImg");
+  var lightboxClose = document.getElementById("lightboxClose");
+  var baImages = document.querySelectorAll(".ba-images img");
+
+  function openLightbox(img) {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add("open");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightboxImg.src = "";
+  }
+
+  if (lightbox && lightboxImg && lightboxClose && baImages.length) {
+    baImages.forEach(function (img) {
+      img.addEventListener("click", function () {
+        openLightbox(img);
+      });
+    });
+
+    lightboxImg.addEventListener("click", closeLightbox);
+    lightboxClose.addEventListener("click", closeLightbox);
   }
 
   // Lead form (client-side only — connect to a real backend/email service later)

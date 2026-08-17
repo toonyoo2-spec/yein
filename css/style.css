@@ -949,6 +949,11 @@ h1, h2, h3, h4, p {
   display: block;
 }
 
+.form-msg.error {
+  color: #c0392b;
+  display: block;
+}
+
 /* ---------- Warning ---------- */
 .warning-section {
   background: var(--bg-pink);

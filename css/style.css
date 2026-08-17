@@ -884,6 +884,10 @@ h1, h2, h3, h4, p {
   gap: 16px;
 }
 
+.form-row .field {
+  margin-top: 0;
+}
+
 .field {
   margin-top: 20px;
 }

@@ -3,7 +3,21 @@
 
   // Always start at the top of the page, ignoring any restored scroll
   // position or a #hash in the URL (e.g. a shared/bookmarked #leadform link).
+  // Skips once the visitor has actually started interacting, so it never
+  // yanks a scrolling user back to the top.
+  var userInteracted = false;
+  ["touchstart", "wheel", "keydown"].forEach(function (evt) {
+    window.addEventListener(
+      evt,
+      function () {
+        userInteracted = true;
+      },
+      { passive: true }
+    );
+  });
+
   function forceScrollTop() {
+    if (userInteracted) return;
     window.scrollTo(0, 0);
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -11,6 +25,13 @@
   }
   forceScrollTop();
   window.addEventListener("load", forceScrollTop);
+  // Covers mobile browsers restoring the page from bfcache (tab switch /
+  // back-forward) without firing "load" again.
+  window.addEventListener("pageshow", forceScrollTop);
+  // Covers late native anchor-scroll on mobile (e.g. after the address bar
+  // collapses and the layout is recalculated).
+  setTimeout(forceScrollTop, 300);
+  setTimeout(forceScrollTop, 1000);
 
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");

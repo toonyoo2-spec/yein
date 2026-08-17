@@ -1,8 +1,16 @@
 (function () {
   "use strict";
 
-  // Always start at the top of the page, ignoring any restored scroll position
-  window.scrollTo(0, 0);
+  // Always start at the top of the page, ignoring any restored scroll
+  // position or a #hash in the URL (e.g. a shared/bookmarked #leadform link).
+  function forceScrollTop() {
+    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  }
+  forceScrollTop();
+  window.addEventListener("load", forceScrollTop);
 
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");

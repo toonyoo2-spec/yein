@@ -874,20 +874,20 @@ h1, h2, h3, h4, p {
 }
 
 .leak-top {
-  background: var(--navy-800);
-  color: var(--white);
-  height: 108px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 160px;
+  overflow: hidden;
 }
 
-.leak-top svg {
-  transition: transform 0.2s ease;
+.leak-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.leak-card:hover .leak-top svg {
-  transform: scale(1.15);
+.leak-card:hover .leak-top img {
+  transform: scale(1.08);
 }
 
 .leak-body {

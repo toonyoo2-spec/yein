@@ -700,10 +700,10 @@ h1, h2, h3, h4, p {
   display: inline-block;
   padding: 7px 16px;
   border-radius: 999px;
-  background: var(--bg-beige);
+  background: var(--navy-800);
   font-size: 13px;
   font-weight: 700;
-  color: var(--navy-800);
+  color: var(--white);
   margin-bottom: 18px;
 }
 
@@ -1306,13 +1306,27 @@ h1, h2, h3, h4, p {
 }
 
 @media (max-width: 860px) {
-  .main-nav,
-  .header-actions .btn {
+  .main-nav {
     display: none;
   }
 
   .nav-toggle {
     display: block;
+  }
+
+  .header-actions .btn {
+    padding: 8px 10px;
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .header-actions .btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .brand-text .brand-tag {
+    font-size: 10px;
   }
 
   .hero-title {
@@ -1329,7 +1343,6 @@ h1, h2, h3, h4, p {
 
   .check-grid,
   .stats-grid,
-  .equipment-grid,
   .step-grid,
   .ba-grid,
   .team-grid,
@@ -1342,8 +1355,12 @@ h1, h2, h3, h4, p {
     grid-template-columns: 1fr 1fr;
   }
 
-  .step-grid {
+  .equipment-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .step-grid {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .warning-grid {
@@ -1372,9 +1389,24 @@ h1, h2, h3, h4, p {
 }
 
 @media (max-width: 520px) {
-  .stats-grid,
-  .step-grid {
-    grid-template-columns: 1fr 1fr;
+  .statement-section h2 {
+    font-size: 21px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 16px 6px;
+  }
+
+  .stat-num {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 11px;
   }
 
   .ba-images {
@@ -1383,11 +1415,6 @@ h1, h2, h3, h4, p {
 
   .hero-title {
     font-size: 27px;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
   }
 
   .site-header .container {

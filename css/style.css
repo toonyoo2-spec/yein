@@ -1272,6 +1272,7 @@ h1, h2, h3, h4, p {
 
 /* ---------- Sticky Bottom Bar ---------- */
 .sticky-bar {
+  --vv-shift: 0px;
   position: fixed;
   left: 0;
   right: 0;
@@ -1281,7 +1282,7 @@ h1, h2, h3, h4, p {
   border-top: 1px solid var(--border);
   box-shadow: 0 -8px 24px rgba(16, 29, 58, 0.08);
   display: none;
-  transform: translateZ(0);
+  transform: translateZ(0) translateY(var(--vv-shift));
   will-change: transform;
   -webkit-backface-visibility: hidden;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -1342,6 +1343,7 @@ h1, h2, h3, h4, p {
 }
 
 .to-top-btn {
+  --vv-shift: 0px;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -1359,14 +1361,14 @@ h1, h2, h3, h4, p {
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
+  transform: translateY(calc(10px + var(--vv-shift)));
   transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
 }
 
 .to-top-btn.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(var(--vv-shift));
 }
 
 .to-top-btn:hover {

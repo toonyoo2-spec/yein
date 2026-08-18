@@ -42,6 +42,7 @@ body {
   background: var(--white);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
 }
 
 img {
@@ -403,7 +404,7 @@ h1, h2, h3, h4, p {
 
 /* ---------- Stats ---------- */
 .stats-section {
-  background: var(--bg-beige);
+  background: var(--white);
   padding: 96px 0;
   text-align: center;
 }
@@ -426,7 +427,7 @@ h1, h2, h3, h4, p {
 }
 
 .stat-card {
-  background: var(--white);
+  background: var(--bg-beige);
   border-radius: var(--radius-md);
   padding: 32px 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -551,24 +552,6 @@ h1, h2, h3, h4, p {
 .step-grid {
   margin-top: 44px;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.4) 3%,
-    #000 14%,
-    #000 86%,
-    rgba(0, 0, 0, 0.4) 97%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.4) 3%,
-    #000 14%,
-    #000 86%,
-    rgba(0, 0, 0, 0.4) 97%,
-    transparent 100%
-  );
 }
 
 .step-track {
@@ -759,6 +742,7 @@ h1, h2, h3, h4, p {
 
 /* ---------- Team ---------- */
 .team-section {
+  background: var(--bg-beige);
   padding: 96px 0;
   text-align: center;
 }
@@ -915,6 +899,7 @@ h1, h2, h3, h4, p {
 
 /* ---------- Leak Types ---------- */
 .leak-section {
+  background: var(--bg-beige);
   padding: 96px 0;
   text-align: center;
 }
@@ -928,6 +913,7 @@ h1, h2, h3, h4, p {
 }
 
 .leak-card {
+  background: var(--white);
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1485,6 +1471,61 @@ h1, h2, h3, h4, p {
 
   body {
     padding-bottom: 66px;
+  }
+
+  /* Tighten vertical section spacing to match the Figma mobile rhythm
+     (44px generally) instead of the desktop 80-96px values. */
+  .check-section,
+  .stats-section,
+  .equipment-section,
+  .step-section,
+  .before-after-section,
+  .team-section,
+  .reviews-section,
+  .leak-section,
+  .leadform-section,
+  .statement-section {
+    padding: 44px 0;
+  }
+
+  .phone-banner {
+    padding: 22px 0;
+  }
+
+  .warning-section {
+    padding: 30px 0;
+  }
+
+  .site-footer {
+    padding: 30px 0 20px;
+  }
+
+  .stats-grid {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 14px 6px;
+  }
+
+  .equipment-card {
+    padding: 14px 12px;
+  }
+
+  .equipment-card .icon {
+    margin-bottom: 8px;
+  }
+
+  .equipment-card h3 {
+    font-size: 13px;
+  }
+
+  .equipment-card ul {
+    margin-top: 6px;
+  }
+
+  .equipment-card li {
+    font-size: 11px;
   }
 }
 

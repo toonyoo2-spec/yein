@@ -1281,6 +1281,9 @@ h1, h2, h3, h4, p {
   border-top: 1px solid var(--border);
   box-shadow: 0 -8px 24px rgba(16, 29, 58, 0.08);
   display: none;
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
 }
 
 .sticky-bar .container {

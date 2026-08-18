@@ -874,7 +874,7 @@ h1, h2, h3, h4, p {
 }
 
 .leak-top {
-  height: 160px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 

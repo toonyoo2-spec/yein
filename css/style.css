@@ -773,6 +773,7 @@ h1, h2, h3, h4, p {
 }
 
 .team-card {
+  background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 26px;

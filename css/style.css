@@ -405,7 +405,7 @@ h1, h2, h3, h4, p {
 /* ---------- Stats ---------- */
 .stats-section {
   background: var(--white);
-  padding: 96px 0;
+  padding: 56px 0;
   text-align: center;
 }
 
@@ -1151,14 +1151,25 @@ h1, h2, h3, h4, p {
 
 /* ---------- Statement ---------- */
 .statement-section {
-  padding: 80px 0;
+  background: var(--navy-900);
+  padding: 64px 0;
   text-align: center;
 }
 
+.statement-section .eyebrow {
+  color: var(--gold);
+}
+
 .statement-section h2 {
-  font-size: 28px;
+  margin-top: 10px;
+  font-size: 34px;
   font-weight: 800;
   line-height: 1.5;
+  color: var(--white);
+}
+
+.statement-section h2 .accent-gold {
+  color: var(--gold);
 }
 
 /* ---------- Coverage ---------- */

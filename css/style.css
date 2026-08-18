@@ -1283,6 +1283,19 @@ h1, h2, h3, h4, p {
   display: none;
 }
 
+/* "bottom: 0" anchors to the layout viewport, which briefly stays
+   taller than what's actually on screen while a mobile browser's
+   address bar is animating in/out, making the bar appear to float
+   with a gap beneath it. "100dvh" tracks the real, currently-visible
+   viewport instead, so the bar stays flush throughout that animation. */
+@supports (top: 100dvh) {
+  .sticky-bar {
+    top: 100dvh;
+    bottom: auto;
+    transform: translateY(-100%);
+  }
+}
+
 .sticky-bar .container {
   display: flex;
   gap: 10px;

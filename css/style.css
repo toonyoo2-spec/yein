@@ -33,6 +33,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -43,6 +44,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 img {
@@ -1223,6 +1227,10 @@ h1, h2, h3, h4, p {
   gap: 32px;
 }
 
+.footer-grid > div {
+  min-width: 0;
+}
+
 .footer-brand {
   display: flex;
   align-items: center;
@@ -1270,41 +1278,29 @@ h1, h2, h3, h4, p {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ---------- Sticky Bottom Bar ---------- */
-.sticky-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 90;
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  box-shadow: 0 -8px 24px rgba(16, 29, 58, 0.08);
+/* ---------- Fixed Call Button (mobile) ---------- */
+.call-fab {
   display: none;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--gold);
+  color: var(--navy-900);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(242, 176, 16, 0.4);
 }
 
-/* "bottom: 0" anchors to the layout viewport, which briefly stays
-   taller than what's actually on screen while a mobile browser's
-   address bar is animating in/out, making the bar appear to float
-   with a gap beneath it. "100dvh" tracks the real, currently-visible
-   viewport instead, so the bar stays flush throughout that animation. */
-@supports (top: 100dvh) {
-  .sticky-bar {
-    top: 100dvh;
-    bottom: auto;
-    transform: translateY(-100%);
-  }
-}
-
-.sticky-bar .container {
-  display: flex;
-  gap: 10px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.sticky-bar .btn {
-  flex: 1;
+.call-fab:hover {
+  background: var(--gold-dark);
 }
 
 /* ---------- Quick Menu (desktop) ---------- */
@@ -1385,7 +1381,7 @@ h1, h2, h3, h4, p {
 @media (max-width: 860px) {
   .to-top-btn {
     right: 16px;
-    bottom: 82px;
+    bottom: 88px;
     width: 42px;
     height: 42px;
   }
@@ -1490,12 +1486,8 @@ h1, h2, h3, h4, p {
     padding: 28px 22px;
   }
 
-  .sticky-bar {
-    display: block;
-  }
-
-  body {
-    padding-bottom: 66px;
+  .call-fab {
+    display: flex;
   }
 
   /* Tighten vertical section spacing to match the Figma mobile rhythm

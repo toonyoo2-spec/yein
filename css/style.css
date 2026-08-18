@@ -1564,6 +1564,18 @@ h1, h2, h3, h4, p {
   }
 }
 
+/* True tablet widths (roughly 640-860px) were falling through to the
+   phone layout above and collapsing to one oversized column. Give
+   them two columns instead so the width is actually used. */
+@media (min-width: 640px) and (max-width: 860px) {
+  .check-grid,
+  .team-grid,
+  .review-grid,
+  .leak-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 520px) {
   .mobile-break {
     display: inline;

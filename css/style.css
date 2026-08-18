@@ -855,7 +855,7 @@ h1, h2, h3, h4, p {
 .leak-grid {
   margin-top: 44px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   text-align: left;
 }
@@ -1154,7 +1154,7 @@ h1, h2, h3, h4, p {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 32px;
 }
 

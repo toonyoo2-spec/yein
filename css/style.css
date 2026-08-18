@@ -1278,28 +1278,46 @@ h1, h2, h3, h4, p {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ---------- Fixed Call Button (mobile) ---------- */
-.call-fab {
+/* ---------- Fixed Call / Inquiry Buttons (mobile) ---------- */
+.fab-group {
   display: none;
   position: fixed;
   right: 16px;
   bottom: 16px;
   z-index: 90;
+  gap: 8px;
+}
+
+.fab-btn {
   width: 60px;
   height: 60px;
   border-radius: 16px;
-  background: var(--gold);
-  color: var(--navy-900);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
   font-size: 12px;
   font-weight: 700;
+  box-shadow: 0 8px 20px rgba(16, 29, 58, 0.25);
+}
+
+.fab-btn-navy {
+  background: var(--navy-800);
+  color: var(--white);
+}
+
+.fab-btn-navy:hover {
+  background: var(--navy-700);
+}
+
+.fab-btn-gold {
+  background: var(--gold);
+  color: var(--navy-900);
   box-shadow: 0 8px 20px rgba(242, 176, 16, 0.4);
 }
 
-.call-fab:hover {
+.fab-btn-gold:hover {
   background: var(--gold-dark);
 }
 
@@ -1486,7 +1504,7 @@ h1, h2, h3, h4, p {
     padding: 28px 22px;
   }
 
-  .call-fab {
+  .fab-group {
     display: flex;
   }
 

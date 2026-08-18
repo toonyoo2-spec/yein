@@ -200,35 +200,6 @@
     });
   }
 
-  // Keep bottom-fixed bars fully on-screen even while the mobile browser's
-  // own address bar is animating back in (e.g. on scroll-up). "position:
-  // fixed; bottom: 0" is anchored to the layout viewport, which can be
-  // taller than what's actually visible (the visual viewport) while that
-  // browser chrome is showing — this shifts the bars up by the difference.
-  var stickyBar = document.querySelector(".sticky-bar");
-  if (window.visualViewport && (stickyBar || toTopBtn)) {
-    var pendingViewportUpdate = false;
-    function applyViewportOffset() {
-      pendingViewportUpdate = false;
-      var vv = window.visualViewport;
-      var offset = Math.max(
-        0,
-        window.innerHeight - vv.height - vv.offsetTop
-      );
-      var value = offset ? "-" + offset + "px" : "0px";
-      if (stickyBar) stickyBar.style.setProperty("--vv-shift", value);
-      if (toTopBtn) toTopBtn.style.setProperty("--vv-shift", value);
-    }
-    function scheduleViewportUpdate() {
-      if (pendingViewportUpdate) return;
-      pendingViewportUpdate = true;
-      requestAnimationFrame(applyViewportOffset);
-    }
-    window.visualViewport.addEventListener("resize", scheduleViewportUpdate);
-    window.visualViewport.addEventListener("scroll", scheduleViewportUpdate);
-    applyViewportOffset();
-  }
-
   // Before/After image lightbox
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightboxImg");

@@ -1284,6 +1284,7 @@ h1, h2, h3, h4, p {
   transform: translateZ(0);
   will-change: transform;
   -webkit-backface-visibility: hidden;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .sticky-bar .container {
@@ -1485,7 +1486,7 @@ h1, h2, h3, h4, p {
   }
 
   body {
-    padding-bottom: 66px;
+    padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px));
   }
 
   /* Tighten vertical section spacing to match the Figma mobile rhythm

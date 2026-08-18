@@ -1519,8 +1519,13 @@ h1, h2, h3, h4, p {
   .reviews-section,
   .leak-section,
   .leadform-section,
-  .statement-section {
+  .statement-section,
+  .coverage-section {
     padding: 44px 0;
+  }
+
+  .coverage-map {
+    padding: 40px 20px;
   }
 
   .phone-banner {
@@ -1644,6 +1649,20 @@ h1, h2, h3, h4, p {
 
   .brand-text .brand-tag {
     display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-info div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .footer-info dt {
+    width: auto;
   }
 }
 

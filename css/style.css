@@ -329,6 +329,12 @@ h1, h2, h3, h4, p {
   border-radius: var(--radius-md);
   padding: 22px 24px;
   box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.check-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .check-item .check-icon {
@@ -399,6 +405,12 @@ h1, h2, h3, h4, p {
   background: var(--white);
   border-radius: var(--radius-md);
   padding: 32px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .stat-num {
@@ -526,6 +538,12 @@ h1, h2, h3, h4, p {
   text-align: left;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .step-photo {
@@ -575,6 +593,12 @@ h1, h2, h3, h4, p {
   border-radius: var(--radius-md);
   padding: 14px;
   box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ba-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .ba-images {
@@ -596,6 +620,11 @@ h1, h2, h3, h4, p {
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.ba-images img:hover {
+  transform: scale(1.08);
 }
 
 /* ---------- Lightbox ---------- */
@@ -696,6 +725,13 @@ h1, h2, h3, h4, p {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 26px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: transparent;
 }
 
 .team-avatar {
@@ -748,6 +784,12 @@ h1, h2, h3, h4, p {
   border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .stars {
@@ -787,6 +829,11 @@ h1, h2, h3, h4, p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover .review-photo img {
+  transform: scale(1.06);
 }
 
 .review-photo span {
@@ -817,6 +864,13 @@ h1, h2, h3, h4, p {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.leak-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: transparent;
 }
 
 .leak-top {
@@ -826,6 +880,14 @@ h1, h2, h3, h4, p {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.leak-top svg {
+  transition: transform 0.2s ease;
+}
+
+.leak-card:hover .leak-top svg {
+  transform: scale(1.15);
 }
 
 .leak-body {
@@ -1016,6 +1078,11 @@ h1, h2, h3, h4, p {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.55);
+  transition: transform 0.3s ease;
+}
+
+.warning-photo:hover img {
+  transform: scale(1.06);
 }
 
 .warning-photo span {

@@ -1251,7 +1251,8 @@ h1, h2, h3, h4, p {
 .footer-info dt {
   color: rgba(255, 255, 255, 0.45);
   flex-shrink: 0;
-  width: 96px;
+  width: 108px;
+  white-space: nowrap;
 }
 
 .dd-phone {
@@ -1660,15 +1661,6 @@ h1, h2, h3, h4, p {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-
-  .footer-info div {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .footer-info dt {
-    width: auto;
   }
 }
 

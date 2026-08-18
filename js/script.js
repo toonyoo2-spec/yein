@@ -72,6 +72,134 @@
     });
   }
 
+  // 5-step carousel — auto-slides left-to-right, and can also be
+  // dragged/scrolled by hand (mouse drag or native touch scroll).
+  var stepTrack = document.querySelector(".step-track");
+  if (stepTrack) {
+    var stepPeriod = 1800; // width of one full card-set (5 cards x 340px + 5 gaps x 20px)
+    var stepSpeed = stepPeriod / 34000; // px per ms, matches the previous 34s loop
+
+    // Duplicate the real cards once more so there are 3 full sets in a row
+    // (real + existing dup + this clone). That gives enough buffer on both
+    // sides to scroll/drag either direction and wrap seamlessly.
+    var realStepCards = stepTrack.querySelectorAll(":scope > .step-card");
+    realStepCards.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      stepTrack.appendChild(clone);
+    });
+
+    // Start in the middle set so there's room to drag/scroll left.
+    stepTrack.scrollLeft = stepPeriod;
+
+    var stepInteracting = false;
+    var stepHovering = false;
+    var stepResumeTimer = null;
+    var stepLastTs = null;
+    var stepDragStartX = 0;
+    var stepDragStartScroll = 0;
+    var stepDragged = false;
+
+    function wrapStepScroll() {
+      if (stepTrack.scrollLeft <= 0) {
+        stepTrack.scrollLeft += stepPeriod;
+      } else if (stepTrack.scrollLeft >= stepPeriod * 2) {
+        stepTrack.scrollLeft -= stepPeriod;
+      }
+    }
+
+    function stepTick(ts) {
+      if (stepLastTs === null) stepLastTs = ts;
+      var dt = ts - stepLastTs;
+      stepLastTs = ts;
+      if (!stepInteracting && !stepHovering) {
+        stepTrack.scrollLeft += stepSpeed * dt;
+      }
+      wrapStepScroll();
+      requestAnimationFrame(stepTick);
+    }
+    requestAnimationFrame(stepTick);
+
+    function scheduleResume() {
+      if (stepResumeTimer) clearTimeout(stepResumeTimer);
+      stepResumeTimer = setTimeout(function () {
+        stepInteracting = false;
+      }, 900);
+    }
+
+    // Mouse drag-to-scroll (desktop)
+    stepTrack.addEventListener("mousedown", function (e) {
+      stepInteracting = true;
+      stepDragged = false;
+      stepTrack.classList.add("dragging");
+      stepDragStartX = e.pageX;
+      stepDragStartScroll = stepTrack.scrollLeft;
+      if (stepResumeTimer) clearTimeout(stepResumeTimer);
+    });
+    window.addEventListener("mousemove", function (e) {
+      if (!stepTrack.classList.contains("dragging")) return;
+      var dx = e.pageX - stepDragStartX;
+      if (Math.abs(dx) > 3) stepDragged = true;
+      stepTrack.scrollLeft = stepDragStartScroll - dx;
+    });
+    window.addEventListener("mouseup", function () {
+      if (!stepTrack.classList.contains("dragging")) return;
+      stepTrack.classList.remove("dragging");
+      scheduleResume();
+    });
+    stepTrack.addEventListener(
+      "click",
+      function (e) {
+        if (stepDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+
+    // Touch scroll / hover — just pause the auto-slide while the visitor
+    // is actually interacting, native scrolling handles the rest.
+    stepTrack.addEventListener(
+      "touchstart",
+      function () {
+        stepInteracting = true;
+        if (stepResumeTimer) clearTimeout(stepResumeTimer);
+      },
+      { passive: true }
+    );
+    stepTrack.addEventListener(
+      "touchend",
+      function () {
+        scheduleResume();
+      },
+      { passive: true }
+    );
+    stepTrack.addEventListener("mouseenter", function () {
+      stepHovering = true;
+    });
+    stepTrack.addEventListener("mouseleave", function () {
+      stepHovering = false;
+    });
+  }
+
+  // Back-to-top button
+  var toTopBtn = document.getElementById("toTopBtn");
+  if (toTopBtn) {
+    function updateToTopBtn() {
+      if (window.scrollY > 480) {
+        toTopBtn.classList.add("visible");
+      } else {
+        toTopBtn.classList.remove("visible");
+      }
+    }
+    updateToTopBtn();
+    window.addEventListener("scroll", updateToTopBtn, { passive: true });
+    toTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   // Before/After image lightbox
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightboxImg");

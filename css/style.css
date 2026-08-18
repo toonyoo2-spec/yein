@@ -377,8 +377,28 @@ h1, h2, h3, h4, p {
 }
 
 .phone-banner p {
-  font-size: 19px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(219, 227, 244, 0.92);
+}
+
+.phone-banner .btn-gold {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+  color: var(--gold);
+  font-size: 22px;
   font-weight: 700;
+}
+
+.phone-banner .btn-gold:hover {
+  background: none;
+  color: var(--gold-dark);
+}
+
+.phone-banner .btn-gold svg path {
+  stroke: var(--gold);
 }
 
 /* ---------- Stats ---------- */
@@ -531,33 +551,49 @@ h1, h2, h3, h4, p {
 .step-grid {
   margin-top: 44px;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 3%,
+    #000 14%,
+    #000 86%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 3%,
+    #000 14%,
+    #000 86%,
+    rgba(0, 0, 0, 0.4) 97%,
+    transparent 100%
+  );
 }
 
 .step-track {
   display: flex;
   gap: 20px;
-  width: max-content;
-  animation: step-scroll 34s linear infinite;
+  overflow-x: auto;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.step-track::-webkit-scrollbar {
+  display: none;
+}
+
+.step-track.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 
 .step-track-dup {
   display: contents;
-}
-
-.step-grid:hover .step-track {
-  animation-play-state: paused;
-}
-
-@keyframes step-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    /* exactly one card-set width (5 cards x 340px + 5 gaps x 20px) for a seamless loop */
-    transform: translateX(-1800px);
-  }
 }
 
 .step-card {
@@ -1209,6 +1245,7 @@ h1, h2, h3, h4, p {
 .footer-info dt {
   color: rgba(255, 255, 255, 0.45);
   flex-shrink: 0;
+  width: 96px;
 }
 
 .footer-col h4 {
@@ -1300,6 +1337,47 @@ h1, h2, h3, h4, p {
 
 .quick-btn-gold:hover {
   background: var(--gold-dark);
+}
+
+.to-top-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 96;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--navy-800);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card-hover);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+}
+
+.to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top-btn:hover {
+  background: var(--navy-700);
+}
+
+@media (max-width: 860px) {
+  .to-top-btn {
+    right: 16px;
+    bottom: 82px;
+    width: 42px;
+    height: 42px;
+  }
 }
 
 @media (min-width: 861px) {
@@ -1474,6 +1552,10 @@ h1, h2, h3, h4, p {
 
   .site-header .container {
     height: 66px;
+  }
+
+  .brand-text .brand-tag {
+    display: none;
   }
 }
 

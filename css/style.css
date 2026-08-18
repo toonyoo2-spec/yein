@@ -282,6 +282,10 @@ h1, h2, h3, h4, p {
   margin-bottom: 22px;
 }
 
+.mobile-break {
+  display: none;
+}
+
 .hero-title {
   font-size: 44px;
   font-weight: 800;
@@ -526,12 +530,39 @@ h1, h2, h3, h4, p {
 
 .step-grid {
   margin-top: 44px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.step-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: step-scroll 34s linear infinite;
+}
+
+.step-track-dup {
+  display: contents;
+}
+
+.step-grid:hover .step-track {
+  animation-play-state: paused;
+}
+
+@keyframes step-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* exactly one card-set width (5 cards x 340px + 5 gaps x 20px) for a seamless loop */
+    transform: translateX(-1800px);
+  }
 }
 
 .step-card {
+  flex: 0 0 340px;
+  width: 340px;
   background: var(--navy-700);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -553,11 +584,11 @@ h1, h2, h3, h4, p {
 }
 
 .step-card-body {
-  padding: 20px 18px 24px;
+  padding: 22px 20px 26px;
 }
 
 .step-num {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
   color: var(--gold);
   letter-spacing: 0.05em;
@@ -565,14 +596,14 @@ h1, h2, h3, h4, p {
 
 .step-card h3 {
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.35;
 }
 
 .step-card p {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -1310,10 +1341,6 @@ h1, h2, h3, h4, p {
     display: none;
   }
 
-  .nav-toggle {
-    display: block;
-  }
-
   .header-actions .btn {
     padding: 8px 10px;
     font-size: 12px;
@@ -1343,7 +1370,6 @@ h1, h2, h3, h4, p {
 
   .check-grid,
   .stats-grid,
-  .step-grid,
   .ba-grid,
   .team-grid,
   .review-grid,
@@ -1357,10 +1383,6 @@ h1, h2, h3, h4, p {
 
   .equipment-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .step-grid {
-    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .warning-grid {
@@ -1389,8 +1411,41 @@ h1, h2, h3, h4, p {
 }
 
 @media (max-width: 520px) {
+  .mobile-break {
+    display: inline;
+  }
+
+  .hero-desc {
+    font-size: 14.5px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .check-section .section-title,
+  .equipment-section .section-title {
+    font-size: 22px;
+  }
+
+  .before-after-section .section-title {
+    font-size: 19px;
+  }
+
+  .warning-headline {
+    font-size: 13px;
+  }
+
+  .warning-title {
+    font-size: 19px;
+  }
+
+  .team-sub {
+    font-size: 13px;
+  }
+
   .statement-section h2 {
-    font-size: 21px;
+    font-size: 19px;
   }
 
   .stats-grid {
@@ -1414,7 +1469,7 @@ h1, h2, h3, h4, p {
   }
 
   .hero-title {
-    font-size: 27px;
+    font-size: 29px;
   }
 
   .site-header .container {

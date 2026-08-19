@@ -834,19 +834,30 @@ h1, h2, h3, h4, p {
 
 .review-track {
   display: flex;
+  align-items: stretch;
   gap: 20px;
   overflow-x: auto;
   cursor: grab;
   scroll-snap-type: x proximity;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--bg-light);
   -webkit-overflow-scrolling: touch;
   user-select: none;
-  padding-bottom: 4px;
+  padding-bottom: 18px;
 }
 
 .review-track::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+.review-track::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-radius: 4px;
+}
+
+.review-track::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
 }
 
 .review-track.dragging {
@@ -857,6 +868,8 @@ h1, h2, h3, h4, p {
   flex: 0 0 320px;
   width: 320px;
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border-radius: var(--radius-md);
   padding: 24px;
@@ -895,7 +908,7 @@ h1, h2, h3, h4, p {
 }
 
 .review-photo {
-  margin-top: 16px;
+  margin-top: auto;
   border-radius: var(--radius-sm);
   overflow: hidden;
   position: relative;

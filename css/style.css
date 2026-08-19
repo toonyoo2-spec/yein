@@ -829,13 +829,34 @@ h1, h2, h3, h4, p {
 
 .review-grid {
   margin-top: 44px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
   text-align: left;
 }
 
+.review-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  cursor: grab;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  padding-bottom: 4px;
+}
+
+.review-track::-webkit-scrollbar {
+  display: none;
+}
+
+.review-track.dragging {
+  cursor: grabbing;
+}
+
 .review-card {
+  flex: 0 0 320px;
+  width: 320px;
+  scroll-snap-align: start;
   background: var(--white);
   border-radius: var(--radius-md);
   padding: 24px;
@@ -1257,8 +1278,17 @@ h1, h2, h3, h4, p {
 
 .dd-phone {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
+}
+
+.dd-phone svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .footer-col h4 {
@@ -1482,7 +1512,6 @@ h1, h2, h3, h4, p {
   .stats-grid,
   .ba-grid,
   .team-grid,
-  .review-grid,
   .leak-grid {
     grid-template-columns: 1fr;
   }
@@ -1582,7 +1611,6 @@ h1, h2, h3, h4, p {
 @media (min-width: 640px) and (max-width: 860px) {
   .check-grid,
   .team-grid,
-  .review-grid,
   .leak-grid {
     grid-template-columns: 1fr 1fr;
   }

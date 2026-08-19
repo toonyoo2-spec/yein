@@ -200,6 +200,45 @@
     });
   }
 
+  // Reviews carousel — drag-to-scroll with the mouse (native touch
+  // scroll already works since the track just uses overflow-x: auto).
+  var reviewTrack = document.querySelector(".review-track");
+  if (reviewTrack) {
+    var reviewDragging = false;
+    var reviewDragged = false;
+    var reviewStartX = 0;
+    var reviewStartScroll = 0;
+
+    reviewTrack.addEventListener("mousedown", function (e) {
+      reviewDragging = true;
+      reviewDragged = false;
+      reviewTrack.classList.add("dragging");
+      reviewStartX = e.pageX;
+      reviewStartScroll = reviewTrack.scrollLeft;
+    });
+    window.addEventListener("mousemove", function (e) {
+      if (!reviewDragging) return;
+      var dx = e.pageX - reviewStartX;
+      if (Math.abs(dx) > 3) reviewDragged = true;
+      reviewTrack.scrollLeft = reviewStartScroll - dx;
+    });
+    window.addEventListener("mouseup", function () {
+      if (!reviewDragging) return;
+      reviewDragging = false;
+      reviewTrack.classList.remove("dragging");
+    });
+    reviewTrack.addEventListener(
+      "click",
+      function (e) {
+        if (reviewDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  }
+
   // Before/After image lightbox
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightboxImg");

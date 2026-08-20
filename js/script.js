@@ -237,6 +237,65 @@
       },
       true
     );
+
+    // Custom scrollbar — always visible (unlike the native scrollbar,
+    // which some browsers only reveal during an active scroll/drag).
+    var reviewScrollbar = document.getElementById("reviewScrollbar");
+    var reviewScrollbarThumb = document.getElementById("reviewScrollbarThumb");
+    if (reviewScrollbar && reviewScrollbarThumb) {
+      function updateReviewThumb() {
+        var maxScroll = reviewTrack.scrollWidth - reviewTrack.clientWidth;
+        var barWidth = reviewScrollbar.clientWidth;
+        var thumbWidth = Math.max(
+          40,
+          (reviewTrack.clientWidth / reviewTrack.scrollWidth) * barWidth
+        );
+        var maxThumbLeft = barWidth - thumbWidth;
+        var ratio = maxScroll > 0 ? reviewTrack.scrollLeft / maxScroll : 0;
+        reviewScrollbarThumb.style.width = thumbWidth + "px";
+        reviewScrollbarThumb.style.left = ratio * maxThumbLeft + "px";
+      }
+      updateReviewThumb();
+      window.addEventListener("resize", updateReviewThumb);
+      reviewTrack.addEventListener("scroll", updateReviewThumb, { passive: true });
+
+      function scrollToBarPosition(clientX) {
+        var rect = reviewScrollbar.getBoundingClientRect();
+        var thumbWidth = reviewScrollbarThumb.offsetWidth;
+        var maxThumbLeft = rect.width - thumbWidth;
+        var targetLeft = clientX - rect.left - thumbWidth / 2;
+        targetLeft = Math.max(0, Math.min(maxThumbLeft, targetLeft));
+        var ratio = maxThumbLeft > 0 ? targetLeft / maxThumbLeft : 0;
+        reviewTrack.scrollLeft = ratio * (reviewTrack.scrollWidth - reviewTrack.clientWidth);
+      }
+
+      var barDragging = false;
+      reviewScrollbar.addEventListener("mousedown", function (e) {
+        barDragging = true;
+        scrollToBarPosition(e.clientX);
+      });
+      window.addEventListener("mousemove", function (e) {
+        if (!barDragging) return;
+        scrollToBarPosition(e.clientX);
+      });
+      window.addEventListener("mouseup", function () {
+        barDragging = false;
+      });
+      reviewScrollbar.addEventListener(
+        "touchstart",
+        function (e) {
+          scrollToBarPosition(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+      reviewScrollbar.addEventListener(
+        "touchmove",
+        function (e) {
+          scrollToBarPosition(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+    }
   }
 
   // Before/After image lightbox
